@@ -100,7 +100,7 @@ const generateRandom = (size = 4) => {
 	//initializes cardValues array
 	let cardValues = []
 	//size should be double (4*4 matrix)/2 since pairs of objects would exist
-	size = (size * size) / 2
+	size = size / 2
 	//Random object selection
 	for (let i = 0; i < size; i++) {
 		const randomIndex = Math.floor(Math.random() * tempArray.length)
@@ -119,7 +119,8 @@ const matrixGenerator = (cardValues, size = 4) => {
 
 	//simple shuffle
 	cardValues.sort(() => Math.random() - 0.5)
-	for (let i = 0; i < size * size; i++) {
+  console.log(cardValues.length)
+	for (let i = 0; i < size; i++) {
 		/*
         Create Cards
         before => front side (contains question mark)
@@ -141,17 +142,18 @@ const matrixGenerator = (cardValues, size = 4) => {
 		console.log(cardValues)
 	}
 	//Grid
-	gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`
+	// gameContainer.style.gridTemplateColumns = `repeat(${size},auto)`
 
 	//Cards
 	cards = document.querySelectorAll(".card-container")
 	cards.forEach((card) => {
 		card.addEventListener("click", () => {
 			//If selected card is not matched yet then only run (i.e already matched card when clicked would be ignored)
-			if (!card.classList.contains("matched")) {
+			if (!card.classList.contains("matched") && !card.classList.contains("flipped")) {
 				//flip the cliked card
 				card.classList.add("flipped")
 				//if it is the firstcard (!firstCard since firstCard is initially false)
+        console.log(card.getAttribute("data-card-value"), firstCard, secondCard, card)
 				if (!firstCard) {
 					//so current card will become firstCard
 					firstCard = card
@@ -245,7 +247,8 @@ function stopGame() {
 const initializer = () => {
 	result.innerText = ""
 	winCount = 0
-	let cardValues = generateRandom()
+	let cardValues = generateRandom(24)
+  // let cardValues = items.reduce((p, c) => [...p, ...c], [])
 	console.log(cardValues)
-	matrixGenerator(cardValues)
+	matrixGenerator(cardValues, 24)
 }
