@@ -173,6 +173,14 @@ const matrixGenerator = (cardValues, size = 4) => {
 						winCount += 1
 						//check if winCount ==half of cardValues
 						if (winCount == Math.floor(cardValues.length / 2)) {
+              result.innerHTML = `
+              <h2>ROUND COMPLETED</h2>
+              <div class="spacer"></div>
+              <h4>${movesCount} <span style="font-weight: 400"> moves</span></h4>
+              <h4>${minutes} <span style="font-weight: 400"> minutes and </span> ${seconds} <span style="font-weight: 400"> seconds taken</span></h4>
+              <div class="spacer"></div>
+              <p>Follow the organizers' instructions.<br><b>DO NOT CLOSE OR RELOAD THIS PAGE</b>.</p>
+              `
 							stopGame()
 						}
 					} else {
@@ -216,14 +224,6 @@ result.classList.add("hide")
 function stopGame() {
 	// controls.classList.remove("hide")
 	// stopButton.classList.add("hide")
-	result.innerHTML = `
-              <h2>ROUND COMPLETED</h2>
-              <div class="spacer"></div>
-              <h4>${movesCount} <span style="font-weight: 400"> moves</span></h4>
-              <h4>${minutes} <span style="font-weight: 400"> minutes and </span> ${seconds} <span style="font-weight: 400"> seconds taken</span></h4>
-              <div class="spacer"></div>
-              <p>Follow the organizers' instructions.<br><b>DO NOT CLOSE OR RELOAD THIS PAGE</b>.</p>
-              `
 	startButton.classList.remove("hide")
   wrapper.classList.add("hide")
 	clearInterval(interval)
